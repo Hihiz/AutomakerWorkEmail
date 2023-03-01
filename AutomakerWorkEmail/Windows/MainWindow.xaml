@@ -5,8 +5,95 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutomakerWorkEmail"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Отслеживание заказов клиентов"
+        Height="600"
+        Width="950"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="465"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Menu>
+            <MenuItem Header="Файл">
+                <MenuItem Header="Выход" Click="MenuItemExit_Click"/>
+            </MenuItem>
+
+            <MenuItem Header="Сервис">
+                <MenuItem Header="Данные клиентов"/>
+                <MenuItem Header="Услуги"/>
+            </MenuItem>
+
+            <MenuItem Header="Администратор">
+                <MenuItem Header="Данные работников"/>
+            </MenuItem>
+        </Menu>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <Image Source="/Resources/logoClientOrder.png" Width="85" Margin="5, 0, 0, 0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Отслеживание заказов клиентов"                             
+                            FontSize="15"
+                            FontWeight="Bold"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" 
+                        Width="130"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+
+                <TextBlock Text="Трек Номер" FontSize="13"/>
+                <TextBox x:Name="textBoxSearchTrackNumber"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3"
+                        Width="130"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="10, 0, 0, 0">
+
+                <TextBlock Text="Фамилия" FontSize="13"/>
+                <TextBox x:Name="textBoxSearchLastName"/>
+            </StackPanel>
+
+        </Grid>
+
+        <StackPanel Grid.Row="2">
+            <DataGrid x:Name="gridClientOrder"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False" FontSize="13">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
+                    <DataGridTextColumn Header="Клиент" Binding="{Binding Client.LastName}"/>
+                    <DataGridTextColumn Header="Услуга" Binding="{Binding Service.Title}"/>
+                    <DataGridTextColumn Header="Трек номер" Binding="{Binding TrackNumber}"/>
+                    <DataGridTextColumn Header="Код для получения" Binding="{Binding Code}"/>
+                    <DataGridTextColumn Header="Дата доставки" Binding="{Binding DateDispatch}"/>
+                    <DataGridTextColumn Header="Адрес доставки" Binding="{Binding Address}"/>
+                    <DataGridTextColumn Header="Итоговая цена" Binding="{Binding FinalCost}"/>
+                    <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3">
+            <Button Content="Добавить"/>
+        </StackPanel>
 
     </Grid>
 </Window>
