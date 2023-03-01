@@ -5,9 +5,9 @@ using System.Windows;
 
 namespace AutomakerWorkEmail.Windows
 {
-    public partial class MainWindow : Window
+    public partial class TrackingClientOrderWindow : Window
     {
-        public MainWindow()
+        public TrackingClientOrderWindow()
         {
             InitializeComponent();
 
@@ -26,6 +26,11 @@ namespace AutomakerWorkEmail.Windows
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void ButtonCloseOrder_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("На кнопку сделать закрытие заказа(удаление) с условие что работник введет код получения клиента");
         }
     }
 }
