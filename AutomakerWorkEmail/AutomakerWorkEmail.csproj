@@ -5,14 +5,23 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\mainLogo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Resources\logoClientOrder.png" />
+    <None Remove="Resources\mainLogo.ico" />
+    <None Remove="Resources\mainLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\mainLogo.ico" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\logoClientOrder.png" />
+    <Resource Include="Resources\mainLogo.ico" />
+    <Resource Include="Resources\mainLogo.png" />
   </ItemGroup>
 
   <ItemGroup>
