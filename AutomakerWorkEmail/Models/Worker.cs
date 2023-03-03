@@ -11,7 +11,6 @@ namespace AutomakerWorkEmail.Models
         public string Patronymic { get; set; } = null!;
         public string Login { get; set; } = null!;
         public string Password { get; set; } = null!;
-        public string? PhotoPath { get; set; }
 
         public int RoleId { get; set; }
 

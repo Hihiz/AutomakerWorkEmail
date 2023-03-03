@@ -45,7 +45,7 @@ namespace AutomakerWorkEmail.Models
 
                 entity.Property(e => e.Patronymic).HasMaxLength(50);
 
-                entity.Property(e => e.PhotoPath).HasMaxLength(1000);
+                //entity.Property(e => e.PhotoPath).HasMaxLength(1000);
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Clients)
@@ -115,7 +115,7 @@ namespace AutomakerWorkEmail.Models
 
                 entity.Property(e => e.Patronymic).HasMaxLength(50);
 
-                entity.Property(e => e.PhotoPath).HasMaxLength(1000);
+                //entity.Property(e => e.PhotoPath).HasMaxLength(1000);
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Workers)
