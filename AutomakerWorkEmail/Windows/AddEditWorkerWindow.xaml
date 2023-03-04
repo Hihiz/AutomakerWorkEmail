@@ -1,0 +1,85 @@
+﻿<Window x:Class="AutomakerWorkEmail.Windows.AddEditWorkerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutomakerWorkEmail.Windows"
+        mc:Ignorable="d"
+        Title="Редактирование/добавление работников" 
+        Height="450" 
+        Width="500"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Width="160"
+                    Margin="0, 0, 170, 180" 
+                    IsEnabled="False"
+                    x:Name="panelId">
+
+            <TextBlock Text="Id"/>
+            <TextBox Text="{Binding Id}"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="160">
+
+                <TextBlock Text="Фамилия"/>
+                <TextBox x:Name="textBoxLastName" Text="{Binding LastName}"/>
+
+                <TextBlock Text="Имя"/>
+                <TextBox x:Name="textBoxFirstName" Text="{Binding FirstName}"/>
+
+                <TextBlock Text="Отчество"/>
+                <TextBox x:Name="textBoxPatronymic" Text="{Binding Patronymic}"/>
+
+                <TextBlock Text="Роль"/>
+                <ComboBox x:Name="comboBoxRole"
+                          DisplayMemberPath="Name"
+                          Text="{Binding Role.Name}"
+                          SelectedItem="{Binding Role}"
+                          IsEditable="True"/>
+
+            </StackPanel>
+
+            <StackPanel x:Name="loginPasswordPanel" HorizontalAlignment="Center" Margin="10, 0, 0, 0" Width="160">
+                <TextBlock Text="Логин"/>
+                <TextBox x:Name="textBoxLogin" Text="{Binding Login}"/>
+
+                <TextBlock Text="Пароль"/>
+                <TextBox x:Name="textBoxPassword" Text="{Binding Password}"/>
+            </StackPanel>
+
+        </StackPanel>
+
+        <StackPanel>
+            <Button Content="Сохранить"                   
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        Margin="0, 340, 0, 0"
+                        Width="120"
+                        Background="DodgerBlue"
+                        Click="ButtonSave_Click"/>
+        </StackPanel>
+
+
+
+
+    </Grid>
+</Window>
