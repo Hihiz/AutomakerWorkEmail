@@ -10,6 +10,7 @@
         Width="1000"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -24,14 +25,11 @@
             </MenuItem>
 
             <MenuItem Header="Сервис">
-                <MenuItem Header="Данные клиентов"/>
-                <MenuItem Header="Услуги"/>
-                <MenuItem Header="Заказы"/>
+                <MenuItem Header="Услуги" Click="MenuItemServiceWindow_Click"/>
             </MenuItem>
 
-            <MenuItem Header="Администратор">
-                <!--Сделать видимосто только для роли администратора-->
-                <MenuItem Header="Данные работников"/>
+            <MenuItem Header="Администратор" x:Name="menuItemAdmin">
+                <MenuItem Header="Данные работников" Click="MenuItemDataWorker_Click"/>
             </MenuItem>
         </Menu>
 
@@ -40,6 +38,14 @@
                 <ColumnDefinition Width="550"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+
+            <Button Content="Создать заказ"
+                    Width="100" 
+                    FontSize="13"
+                    HorizontalAlignment="Left" VerticalAlignment="Center"
+                    Margin="5, 0, 0, 0"
+                    Background="DodgerBlue"
+                    Click="ButtonAddOrder_Click"/>
 
             <!--Поиск заказа по трек номеру клиента-->
             <StackPanel Width="130"
@@ -59,44 +65,71 @@
 
                 <TextBlock Text="Фамилия" FontSize="13"/>
                 <TextBox x:Name="textBoxSearchLastName"/>
+
             </StackPanel>
 
+            <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                <TextBlock x:Name="textBlockCountClientOrder" Text="Колво" FontSize="14"/>
+            </StackPanel>
         </Grid>
 
-        <StackPanel Grid.Row="2">
-            <DataGrid x:Name="gridClientOrder"
+        <TabControl Grid.Row="2">
+            <TabItem Header="Активные заказа">
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <DataGrid x:Name="gridClientOrder"
                       IsReadOnly="True"
                       AutoGenerateColumns="False" 
                       FontSize="13"
-                      Margin="0, 5, 0, 0">
+                      Margin="0, 5, 0, 0"
+                      MouseDoubleClick="EditClientOrder_MouseDoubleClick">
 
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
-                    <DataGridTextColumn Header="Клиент" Binding="{Binding Client.LastName}"/>
-                    <DataGridTextColumn Header="Услуга" Binding="{Binding Service.Title}"/>
-                    <DataGridTextColumn Header="Трек номер" Binding="{Binding TrackNumber}"/>
-                    <DataGridTextColumn Header="Код для получения" Binding="{Binding Code}"/>
-                    <DataGridTextColumn Header="Дата доставки" Binding="{Binding DateDispatch}"/>
-                    <DataGridTextColumn Header="Адрес доставки" Binding="{Binding Address}"/>
-                    <DataGridTextColumn Header="Итоговая цена" Binding="{Binding FinalCost}"/>
-                    <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
+                            <DataGridTextColumn Header="Клиент" Binding="{Binding Client.LastName}"/>
+                            <DataGridTextColumn Header="Услуга" Binding="{Binding Service.Title}"/>
+                            <DataGridTextColumn Header="Трек номер" Binding="{Binding TrackNumber}"/>
+                            <DataGridTextColumn Header="Код для получения" Binding="{Binding Code}"/>
+                            <DataGridTextColumn Header="Дата доставки" Binding="{Binding DateDispatch}"/>
+                            <DataGridTextColumn Header="Адрес доставки" Binding="{Binding Address}"/>
+                            <DataGridTextColumn Header="Итоговая цена" Binding="{Binding FinalCost}"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
 
-                    <DataGridTemplateColumn Header="Действие">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Закрыть" Click="ButtonCloseOrder_Click" Background="DodgerBlue"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </StackPanel>
+                            <DataGridTemplateColumn Header="Действие">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Выдать" Click="ButtonCloseOrder_Click" Background="DodgerBlue"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="DataGridRow">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Value="Готов">
+                                        <Setter Property="Background" Value="Green"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Закрытие заказы">
+
+                <TextBlock Text="Сделать триггер на удаление заказа клиента и таблицу с логом удаления"/>
+
+            </TabItem>
+        </TabControl>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal">
             <StatusBar Background="Transparent">
                 <StatusBarItem>
                     <TextBlock x:Name="textBlockStatusWorker" Text="Тест Администратор" FontSize="12" FontWeight="Bold"/>
                 </StatusBarItem>
+                <Button Content="Выход" Click="ButtonExitRole_Click"/>
             </StatusBar>
         </StackPanel>
     </Grid>
