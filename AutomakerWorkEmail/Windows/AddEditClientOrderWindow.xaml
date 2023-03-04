@@ -1,0 +1,161 @@
+﻿<Window x:Class="AutomakerWorkEmail.Windows.AddEditClientOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutomakerWorkEmail.Windows"
+        mc:Ignorable="d"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
+        Title="Редактирование/добавление заказа клиента" 
+        Height="450" 
+        Width="500"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel HorizontalAlignment="Left">
+            <fa:ImageAwesome Icon="Regular_AddressBook" Width="13" Margin="32, 3, 0, 0"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Регистрация клиента" FontSize="15" FontWeight="Bold"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+
+            <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+                <StackPanel HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        Margin="0, 0, 0, 0"  Width="160">
+
+                    <TextBlock Text="Фамилия"/>
+                    <TextBox x:Name="textBoxLastName" Text="{Binding LastName}"/>
+
+                    <TextBlock Text="Имя"/>
+                    <TextBox x:Name="textBoxFirstName" Text="{Binding FirstName}"/>
+
+                    <TextBlock Text="Отчество"/>
+                    <TextBox x:Name="textBoxPatronymic" Text="{Binding Patronymic}"/>
+
+                    <TextBlock Text="Пасспорт"/>
+                    <TextBox x:Name="textBoxPassport" Text="{Binding Passport}"/>
+
+                    <TextBlock Text="Роль"/>
+                    <ComboBox x:Name="comboBoxRole" 
+                              DisplayMemberPath="Name"
+                              Text="{Binding Role.Name}"
+                              SelectedItem="{Binding Role}"
+                              IsEditable="True"/>
+
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <Button Content="Регистрация"                   
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        Width="120"
+                        Background="DodgerBlue"
+                        Click="ButtonSaveClient_Click"/>
+        </StackPanel>
+
+        <GridSplitter Grid.RowSpan="2" Width="5"/>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left">
+            <fa:ImageAwesome Icon="Solid_Book" Width="13" Margin="50, 3, 0, 0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+            <TextBlock Text="Запись клиента" FontSize="15" FontWeight="Bold"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Width="160"
+                    Margin="0, 0, 19, 330" 
+                    IsEnabled="False"
+                    x:Name="panelId">
+
+            <TextBlock Text="Id"/>
+            <TextBox Text="{Binding Id}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1"
+            HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+
+            <StackPanel HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        Width="160"
+                        Margin="0, 35, 20, 0">
+                <TextBlock Text="Статус"/>
+                <TextBox x:Name="textBoxStatus" Text="{Binding Status}"/>
+
+                <TextBlock Text="Клиент"/>
+                <ComboBox x:Name="comboBoxClient" 
+                          DisplayMemberPath="LastName"
+                          Text="{Binding Client.LastName}"
+                          SelectedItem="{Binding Client}"
+                          IsEditable="True"/>
+
+                <TextBlock Text="Услуга"/>
+                <ComboBox x:Name="comboBoxService" 
+                          DisplayMemberPath="Title"
+                          Text="{Binding Service.Title}"
+                          SelectedItem="{Binding Service}"
+                          IsEditable="True"/>
+
+                <TextBlock x:Name="textBlockTrackNumber" Text="Трек номер"/>
+                <TextBox x:Name="textBoxTrackNumber" IsEnabled="False" Text="{Binding TrackNumber}"/>
+
+                <TextBlock x:Name="textBlockCode" Text="Код для получения"/>
+                <TextBox x:Name="textBoxCode" IsEnabled="False" Text="{Binding Code}"/>
+
+                <TextBlock Text="Дата доставки"/>
+                <TextBox x:Name="textBoxDateDispatch" Text="{Binding DateDispatch, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Text="Адресс доставки"/>
+                <TextBox x:Name="textBoxAddress" Text="{Binding Address}"/>
+
+                <TextBlock Text="Итоговая цена"/>
+                <TextBox x:Name="textBoxFinalConst" Text="{Binding FinalCost, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Text="Описание"/>
+                <TextBox x:Name="textBoxDescription" Text="{Binding Description}"/>
+
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Button Content="Записать"                   
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        Margin="0, 0, 0, 5"
+                        Width="120"
+                        Background="DodgerBlue"
+                        Click="ButtonSaveClientOrder_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
