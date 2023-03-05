@@ -44,7 +44,7 @@
                 <Button Content="Добавить" Click="ButtonAddWorker_Click" Width="100" Background="DodgerBlue"/>
             </StackPanel>
 
-            <!--Поиск работника по фамилии-->
+            <!--Поиск работника по ФИО-->
             <StackPanel Grid.Column="1"
                         Width="130"
                         HorizontalAlignment="Center"

@@ -53,7 +53,7 @@
                         VerticalAlignment="Center">
 
                 <TextBlock Text="Трек Номер" FontSize="13"/>
-                <TextBox x:Name="textBoxSearchTrackNumber"/>
+                <TextBox x:Name="textBoxSearchTrackNumber" TextChanged="SearchTrackNumber_TextChanged"/>
             </StackPanel>
 
             <!--Поиск заказа по фамилии клиента-->
@@ -64,7 +64,7 @@
                         Margin="10, 0, 0, 0">
 
                 <TextBlock Text="Фамилия" FontSize="13"/>
-                <TextBox x:Name="textBoxSearchLastName"/>
+                <TextBox x:Name="textBoxSearchLastName" TextChanged="SearchLastName_TextChanged"/>
 
             </StackPanel>
 
@@ -103,7 +103,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
-                        
+
                         <DataGrid.ItemContainerStyle>
                             <Style TargetType="DataGridRow">
                                 <Style.Triggers>
@@ -119,7 +119,7 @@
 
             <TabItem Header="Закрытие заказы">
 
-                <TextBlock Text="Сделать триггер на удаление заказа клиента и таблицу с логом удаления"/>
+                <TextBlock Text="Показывать закрытые заказы"/>
 
             </TabItem>
         </TabControl>

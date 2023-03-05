@@ -1,5 +1,6 @@
 ﻿using AutomakerWorkEmail.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
@@ -91,12 +92,23 @@ namespace AutomakerWorkEmail.Windows
         {
             new LoginWindow().Show();
             Close();
-
         }
 
         private void SearchFio_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
+            using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
+            {
+                List<Worker> worker = db.Workers.ToList();
+                gridWorker.ItemsSource = worker;
 
+                if (textBoxSearchFio.Text.Length > 0)
+                    worker = worker.Where(l => l.LastName.Contains(textBoxSearchFio.Text)
+                    || l.FirstName.Contains(textBoxSearchFio.Text)
+                    || l.Patronymic.Contains(textBoxSearchFio.Text)).ToList();
+
+                gridWorker.ItemsSource = worker;
+                textBlockCountWorker.Text = $"Количество: {worker.Count()} из {db.Workers.ToList().Count}";
+            }
         }
     }
 }

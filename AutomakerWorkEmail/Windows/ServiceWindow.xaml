@@ -29,7 +29,6 @@
             </MenuItem>
 
             <MenuItem Header="Администратор" x:Name="menuItemAdmin">
-                <!--Сделать видимосто только для роли администратора-->
                 <MenuItem Header="Данные работников" Click="MenuItemDataWorker_Click"/>
                 <MenuItem Header="Выход" Click="MenuItemExitAdmin_Click"/>
             </MenuItem>
@@ -52,7 +51,7 @@
                         VerticalAlignment="Center">
 
                 <TextBlock Text="Название" FontSize="13"/>
-                <TextBox x:Name="textBoxSearchService"/>
+                <TextBox x:Name="textBoxSearchService" TextChanged="SearchService_TextChanged"/>
             </StackPanel>
 
         </Grid>

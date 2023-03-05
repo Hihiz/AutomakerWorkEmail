@@ -1,7 +1,10 @@
 ﻿using AutomakerWorkEmail.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace AutomakerWorkEmail.Windows
 {
@@ -84,6 +87,34 @@ namespace AutomakerWorkEmail.Windows
         {
             new LoginWindow().Show();
             Close();
+        }
+
+        private void SearchTrackNumber_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            SearchClientOrder();
+        }
+
+        private void SearchLastName_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            SearchClientOrder();
+        }
+
+        private void SearchClientOrder()
+        {
+            using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
+            {
+                List<ClientOrder> clientOrder = db.ClientOrders.Include(c => c.Client).Include(s => s.Service).ToList();
+                gridClientOrder.ItemsSource = clientOrder;
+
+                if (textBoxSearchTrackNumber.Text.Length > 0)
+                    clientOrder = clientOrder.Where(t => t.TrackNumber.Contains(textBoxSearchTrackNumber.Text)).ToList();
+
+                if (textBoxSearchLastName.Text.Length > 0)
+                    clientOrder = clientOrder.Where(l => l.Client.LastName.Contains(textBoxSearchLastName.Text)).ToList();
+
+                gridClientOrder.ItemsSource = clientOrder;
+                textBlockCountClientOrder.Text = $"Количество: {clientOrder.Count()} из {db.ClientOrders.ToList().Count}";
+            }
         }
     }
 }

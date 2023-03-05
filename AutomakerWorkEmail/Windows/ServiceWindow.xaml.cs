@@ -1,6 +1,8 @@
 ﻿using AutomakerWorkEmail.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace AutomakerWorkEmail.Windows
 {
@@ -51,7 +53,6 @@ namespace AutomakerWorkEmail.Windows
         private void MenuItemExitAdmin_Click(object sender, RoutedEventArgs e)
         {
             new LoginWindow().Show();
-
             Close();
         }
 
@@ -124,6 +125,21 @@ namespace AutomakerWorkEmail.Windows
         {
             new LoginWindow().Show();
             Close();
+        }
+
+        private void SearchService_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
+            {
+                List<Service> service = db.Services.ToList();
+                gridService.ItemsSource = service;
+
+                if (textBoxSearchService.Text.Length > 0)
+                    service = service.Where(t => t.Title.Contains(textBoxSearchService.Text)).ToList();
+
+                gridService.ItemsSource = service;
+                textBlockCountService.Text = $"Количество: {service.Count()} из {db.Services.ToList().Count()}";
+            }
         }
     }
 }
