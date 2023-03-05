@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -30,13 +31,36 @@ namespace AutomakerWorkEmail.Windows
             {
                 Title = "Добавление работника";
                 panelId.Visibility = Visibility.Collapsed;
-
-              
             }
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
+            StringBuilder errors = new StringBuilder();
+            if (string.IsNullOrWhiteSpace(textBoxFirstName.Text))
+                errors.AppendLine("Укажите имя");
+
+            if (string.IsNullOrWhiteSpace(textBoxLastName.Text))
+                errors.AppendLine("Укажите фамилию");
+
+            if (string.IsNullOrWhiteSpace(textBoxPatronymic.Text))
+                errors.AppendLine("Укажите отчество");
+
+            if (string.IsNullOrWhiteSpace(textBoxLogin.Text))
+                errors.AppendLine("Укажите логин");
+
+            if (string.IsNullOrWhiteSpace(textBoxPassword.Text))
+                errors.AppendLine("Укажите пароль");
+
+            if (string.IsNullOrWhiteSpace(comboBoxRole.Text))
+                errors.AppendLine("Укажите роль");
+
+            if (errors.Length > 0)
+            {
+                MessageBox.Show(errors.ToString());
+                return;
+            }
+
             using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
             {
                 if (currentWorker == null)

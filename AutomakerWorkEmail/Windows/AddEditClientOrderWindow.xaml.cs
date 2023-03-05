@@ -3,8 +3,10 @@ using AutomakerWorkEmail.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace AutomakerWorkEmail.Windows
 {
@@ -53,6 +55,31 @@ namespace AutomakerWorkEmail.Windows
 
         private void ButtonSaveClientOrder_Click(object sender, RoutedEventArgs e)
         {
+            StringBuilder errors = new StringBuilder();
+            if (string.IsNullOrWhiteSpace(textBoxStatus.Text))
+                errors.AppendLine("Укажите статус");
+
+            if (string.IsNullOrWhiteSpace(comboBoxClient.Text))
+                errors.AppendLine("Укажите клиента");
+
+            if (string.IsNullOrWhiteSpace(comboBoxService.Text))
+                errors.AppendLine("Укажите усулугу");
+
+            if (string.IsNullOrWhiteSpace(textBoxDateDispatch.Text))
+                errors.AppendLine("Укажите дату доставки: dd.mm.yyyy hh:mm:ss");
+
+            if (string.IsNullOrWhiteSpace(textBoxAddress.Text))
+                errors.AppendLine("Укажите адрес достави");
+
+            if (string.IsNullOrWhiteSpace(textBoxFinalConst.Text))
+                errors.AppendLine("Укажите итоговую цену");
+
+            if (errors.Length > 0)
+            {
+                MessageBox.Show(errors.ToString());
+                return;
+            }
+
             using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
             {
                 if (currentClientOrder == null)
@@ -99,10 +126,15 @@ namespace AutomakerWorkEmail.Windows
 
                     try
                     {
-                        //db.ClientOrders.Update(currentClientOrder);
+                        db.Entry(currentClientOrder).State = EntityState.Detached;
 
-                        db.Entry(currentClientOrder).State = EntityState.Modified;
-                        db.ClientOrders.Attach(currentClientOrder);                       
+                        //db.Entry(currentClientOrder).State = EntityState.Modified;      
+
+                        db.ClientOrders.Update(currentClientOrder);
+                        //db.Entry(currentClientOrder).State = EntityState.Detached;
+
+
+                        //db.ClientOrders.Attach(currentClientOrder);
 
                         db.SaveChanges();
                         MessageBox.Show("Заказ обновлен", "Успешно");
@@ -121,6 +153,28 @@ namespace AutomakerWorkEmail.Windows
 
         private void ButtonSaveClient_Click(object sender, RoutedEventArgs e)
         {
+            StringBuilder errors = new StringBuilder();
+            if (string.IsNullOrWhiteSpace(textBoxLastName.Text))
+                errors.AppendLine("Укажите фамилию");
+
+            if (string.IsNullOrWhiteSpace(textBoxFirstName.Text))
+                errors.AppendLine("Укажите имя");
+
+            if (string.IsNullOrWhiteSpace(textBoxPatronymic.Text))
+                errors.AppendLine("Укажите отчество");
+
+            if (string.IsNullOrWhiteSpace(textBoxPassport.Text))
+                errors.AppendLine("Укажите паспортные данные");
+
+            if (string.IsNullOrWhiteSpace(comboBoxRole.Text))
+                errors.AppendLine("Укажите роль ");
+
+            if (errors.Length > 0)
+            {
+                MessageBox.Show(errors.ToString());
+                return;
+            }
+
             using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
             {
 

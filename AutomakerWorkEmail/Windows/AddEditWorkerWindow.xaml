@@ -77,9 +77,5 @@
                         Background="DodgerBlue"
                         Click="ButtonSave_Click"/>
         </StackPanel>
-
-
-
-
     </Grid>
 </Window>

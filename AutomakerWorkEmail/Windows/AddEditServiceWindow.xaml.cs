@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -31,6 +32,20 @@ namespace AutomakerWorkEmail.Windows
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
+            StringBuilder errors = new StringBuilder();
+            if (string.IsNullOrWhiteSpace(textBoxTitle.Text))
+                errors.AppendLine("Укажите название");
+
+            if (string.IsNullOrWhiteSpace(textBoxCost.Text))
+                errors.AppendLine("Укажите цену");
+
+            if (errors.Length > 0)
+            {
+                MessageBox.Show(errors.ToString());
+                return;
+            }
+
+
             using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
             {
                 if (currentService == null)

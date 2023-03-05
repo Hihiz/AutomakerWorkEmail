@@ -36,7 +36,6 @@ namespace AutomakerWorkEmail.Windows
                             db.SaveChanges();
                             MessageBox.Show($"Заказ: {currentClientOrder.Service.Title} выдан: {currentClientOrder.Client.LastName} {currentClientOrder.Client.FirstName}", "Успешно");
                         }
-
                     }
                     else
                     {

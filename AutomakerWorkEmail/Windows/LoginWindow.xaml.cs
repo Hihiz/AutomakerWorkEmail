@@ -57,7 +57,7 @@ namespace AutomakerWorkEmail.Windows
         private async void DisableButtonAsync()
         {
             buttonLogin.IsEnabled = false;
-            await Task.Delay(TimeSpan.FromSeconds(10));
+            await Task.Delay(TimeSpan.FromSeconds(3));
             buttonLogin.IsEnabled = true;
         }
     }

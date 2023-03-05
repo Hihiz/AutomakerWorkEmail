@@ -83,7 +83,7 @@
         <GridSplitter Grid.RowSpan="2" Width="5"/>
 
         <StackPanel Grid.Column="1" HorizontalAlignment="Left">
-            <fa:ImageAwesome Icon="Solid_Book" Width="13" Margin="50, 3, 0, 0"/>
+            <fa:ImageAwesome Icon="Solid_Book" Width="13" Margin="53, 2, 0, 0"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" HorizontalAlignment="Center">
@@ -118,7 +118,7 @@
                           DisplayMemberPath="LastName"
                           Text="{Binding Client.LastName}"
                           SelectedItem="{Binding Client}"
-                          IsEditable="True"/>
+                          IsEditable="False"/>
 
                 <TextBlock Text="Услуга"/>
                 <ComboBox x:Name="comboBoxService" 
