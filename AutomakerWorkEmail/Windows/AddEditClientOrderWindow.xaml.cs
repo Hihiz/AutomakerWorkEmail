@@ -2,6 +2,7 @@
 using AutomakerWorkEmail.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -45,6 +46,10 @@ namespace AutomakerWorkEmail.Windows
                 textBoxCode.Visibility = Visibility.Collapsed;
                 textBlockCode.Visibility = Visibility.Collapsed;
             }
+
+            List<string> comboBoxStatusList = new List<string>() { "Создан", "Оформлен", "В ожидании", "Отправлено", "Принят", "Готов", "Выдан" };
+
+            comboBoxStatus.ItemsSource = comboBoxStatusList.ToList();
         }
 
         private void MenuItemClientOrder_Click(object sender, RoutedEventArgs e)
@@ -56,7 +61,7 @@ namespace AutomakerWorkEmail.Windows
         private void ButtonSaveClientOrder_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
-            if (string.IsNullOrWhiteSpace(textBoxStatus.Text))
+            if (string.IsNullOrWhiteSpace(comboBoxStatus.Text))
                 errors.AppendLine("Укажите статус");
 
             if (string.IsNullOrWhiteSpace(comboBoxClient.Text))
@@ -86,7 +91,7 @@ namespace AutomakerWorkEmail.Windows
                 {
                     ClientOrder clientOrder = new ClientOrder()
                     {
-                        Status = textBoxStatus.Text,
+                        Status = comboBoxStatus.Text,
                         ClientId = ((Client)comboBoxClient.SelectedItem).Id,
                         ServiceId = ((Service)comboBoxService.SelectedItem).Id,
                         //TrackNumber = textBoxTrackNumber.Text,     

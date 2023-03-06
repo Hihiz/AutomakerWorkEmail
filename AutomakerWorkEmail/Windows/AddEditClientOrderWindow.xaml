@@ -111,14 +111,16 @@
                         Width="160"
                         Margin="0, 35, 20, 0">
                 <TextBlock Text="Статус"/>
-                <TextBox x:Name="textBoxStatus" Text="{Binding Status}"/>
+                <ComboBox x:Name="comboBoxStatus" 
+                          SelectedValue="{Binding Status}" 
+                          IsEditable="True"/>
 
                 <TextBlock Text="Клиент"/>
                 <ComboBox x:Name="comboBoxClient" 
                           DisplayMemberPath="LastName"
                           Text="{Binding Client.LastName}"
                           SelectedItem="{Binding Client}"
-                          IsEditable="False"/>
+                          IsEditable="True"/>
 
                 <TextBlock Text="Услуга"/>
                 <ComboBox x:Name="comboBoxService" 
