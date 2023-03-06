@@ -135,8 +135,9 @@
                 <TextBlock x:Name="textBlockCode" Text="Код для получения"/>
                 <TextBox x:Name="textBoxCode" IsEnabled="False" Text="{Binding Code}"/>
 
-                <TextBlock Text="Дата доставки"/>
-                <TextBox x:Name="textBoxDateDispatch" Text="{Binding DateDispatch, UpdateSourceTrigger=PropertyChanged}"/>
+                <DatePicker  Margin="0, 5, 0, 0"
+                             x:Name="datePickerDateDispatch"                           
+                             SelectedDate="{Binding DateDispatch}"/>
 
                 <TextBlock Text="Адресс доставки"/>
                 <TextBox x:Name="textBoxAddress" Text="{Binding Address}"/>

@@ -70,7 +70,7 @@ namespace AutomakerWorkEmail.Windows
             if (string.IsNullOrWhiteSpace(comboBoxService.Text))
                 errors.AppendLine("Укажите усулугу");
 
-            if (string.IsNullOrWhiteSpace(textBoxDateDispatch.Text))
+            if (string.IsNullOrWhiteSpace(datePickerDateDispatch.Text))
                 errors.AppendLine("Укажите дату доставки: dd.mm.yyyy hh:mm:ss");
 
             if (string.IsNullOrWhiteSpace(textBoxAddress.Text))
@@ -98,7 +98,7 @@ namespace AutomakerWorkEmail.Windows
                         TrackNumber = trackNumberBuilder.GenerateTrackNumber(),
                         //Code = textBoxCode.Text,
                         Code = codeGetOrderClientBuilder.GenerateCode(),
-                        DateDispatch = Convert.ToDateTime(textBoxDateDispatch.Text),
+                        DateDispatch = Convert.ToDateTime(datePickerDateDispatch.Text),
                         Address = textBoxAddress.Text,
                         FinalCost = Convert.ToDecimal(textBoxFinalConst.Text),
                         Description = textBoxDescription.Text,
@@ -131,7 +131,7 @@ namespace AutomakerWorkEmail.Windows
 
                     try
                     {
-                        db.Entry(currentClientOrder).State = EntityState.Detached;
+                        //db.Entry(currentClientOrder).State = EntityState.Detached;
 
                         //db.Entry(currentClientOrder).State = EntityState.Modified;      
 
