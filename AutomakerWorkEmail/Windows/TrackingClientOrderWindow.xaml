@@ -7,16 +7,16 @@
         mc:Ignorable="d"
         Title="Отслеживание заказов клиентов"
         Height="600"
-        Width="1000"
-        ResizeMode="NoResize"
+        Width="1300"
+        ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="485"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Menu>
@@ -75,12 +75,11 @@
 
         <TabControl Grid.Row="2">
             <TabItem Header="Активные заказа">
-
-                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
                     <DataGrid x:Name="gridClientOrder"
                       IsReadOnly="True"
                       AutoGenerateColumns="False" 
-                      FontSize="13"
+                      FontSize="14"
                       Margin="0, 5, 0, 0"
                       MouseDoubleClick="EditClientOrder_MouseDoubleClick">
 
@@ -89,11 +88,11 @@
                             <DataGridTextColumn Header="Клиент" Binding="{Binding Client.LastName}"/>
                             <DataGridTextColumn Header="Услуга" Binding="{Binding Service.Title}"/>
                             <DataGridTextColumn Header="Трек номер" Binding="{Binding TrackNumber}"/>
-                            <DataGridTextColumn Header="Код для получения" Binding="{Binding Code}"/>
+                            <DataGridTextColumn Header="Код для получения" Binding="{Binding Code}" />
                             <DataGridTextColumn Header="Дата доставки" Binding="{Binding DateDispatch}"/>
-                            <DataGridTextColumn Header="Адрес доставки" Binding="{Binding Address}"/>
+                            <DataGridTextColumn Header="Адрес доставки" Binding="{Binding Address}" />
                             <DataGridTextColumn Header="Итоговая цена" Binding="{Binding FinalCost}"/>
-                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="80"/>
 
                             <DataGridTemplateColumn Header="Действие">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -117,14 +116,46 @@
                 </StackPanel>
             </TabItem>
 
-            <TabItem Header="Закрытие заказы">
+            <TabItem Header="Закрытие заказы" x:Name="tabItemCloseOrder">
 
-                <TextBlock Text="Показывать закрытые заказы"/>
+                <!--<TextBlock Text="Показывать закрытые заказы"/>-->
+
+                <StackPanel Orientation="Horizontal">
+                    <DataGrid x:Name="gridCloseOrder"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False" 
+                      FontSize="14"
+                      Margin="0, 5, 0, 0" >
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
+                            <DataGridTextColumn Header="Клиент" Binding="{Binding Client.LastName}"/>
+                            <DataGridTextColumn Header="Услуга" Binding="{Binding Service.Title}"/>
+                            <DataGridTextColumn Header="Трек номер" Binding="{Binding TrackNumber}"/>
+                            <DataGridTextColumn Header="Код для получения" Binding="{Binding Code}" />
+                            <DataGridTextColumn Header="Дата доставки" Binding="{Binding DateDispatch}"/>
+                            <DataGridTextColumn Header="Адрес доставки" Binding="{Binding Address}" />
+                            <DataGridTextColumn Header="Итоговая цена" Binding="{Binding FinalCost}"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="80"/>
+
+                        </DataGrid.Columns>
+
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="DataGridRow">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Value="Выдан">
+                                        <Setter Property="Background" Value="Yellow"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                    </DataGrid>
+                </StackPanel>
 
             </TabItem>
         </TabControl>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal">
+        <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Bottom">
             <StatusBar Background="Transparent">
                 <StatusBarItem>
                     <TextBlock x:Name="textBlockStatusWorker" Text="Тест Администратор" FontSize="12" FontWeight="Bold"/>

@@ -1,5 +1,8 @@
 ﻿using AutomakerWorkEmail.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace AutomakerWorkEmail.Windows
 {
@@ -27,15 +30,23 @@ namespace AutomakerWorkEmail.Windows
                 if (currentClientOrder != null)
                 {
                     if (textBoxCodeClient.Text == currentClientOrder.Code)
-                    {                       
+                    {
                         if (MessageBox.Show($"Вы точно хотите выдать {currentClientOrder.Client.FirstName} {currentClientOrder.Client.LastName}" +
                             $" {currentClientOrder.Client.Patronymic} | {currentClientOrder.Service.Title}", "Внимание",
                             MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                         {
-                            db.ClientOrders.Remove(currentClientOrder);
+                            //db.ClientOrders.Remove(currentClientOrder);
+                            //db.SaveChanges();
+
+                            currentClientOrder.Status = "Выдан";
+                            db.ClientOrders.Update(currentClientOrder);
                             db.SaveChanges();
+
                             MessageBox.Show($"Заказ: {currentClientOrder.Service.Title} выдан: {currentClientOrder.Client.LastName} {currentClientOrder.Client.FirstName}", "Успешно");
                         }
+
+                        TrackingClientOrderWindow trackingClientOrderWindow = Application.Current.Windows.OfType<TrackingClientOrderWindow>().FirstOrDefault();
+                        (trackingClientOrderWindow.FindName("gridCloseOrder") as DataGrid).ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status == "Выдан").ToList();
                     }
                     else
                     {

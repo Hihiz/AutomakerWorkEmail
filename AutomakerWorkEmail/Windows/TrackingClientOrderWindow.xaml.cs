@@ -21,12 +21,15 @@ namespace AutomakerWorkEmail.Windows
             using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
             {
                 gridClientOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).ToList();
+
                 textBlockCountClientOrder.Text = $"Количество: {db.ClientOrders.Count()}";
 
                 if (currentWorker.RoleId == 1)
                     menuItemAdmin.Visibility = Visibility.Visible;
                 else
                     menuItemAdmin.Visibility = Visibility.Collapsed;
+
+                gridCloseOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status == "Выдан").ToList();
             }
 
             textBlockStatusWorker.Text = $"Вы вошли как: {worker.FirstName} {worker.LastName} {worker.Patronymic} | {worker.Role.Name}";
@@ -63,6 +66,7 @@ namespace AutomakerWorkEmail.Windows
             {
                 gridClientOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).ToList();
                 textBlockCountClientOrder.Text = $"Количество: {db.ClientOrders.Count()}";
+                gridCloseOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status == "Выдан").ToList();
             }
         }
 
@@ -113,7 +117,7 @@ namespace AutomakerWorkEmail.Windows
                     clientOrder = clientOrder.Where(l => l.Client.LastName.Contains(textBoxSearchLastName.Text)).ToList();
 
                 gridClientOrder.ItemsSource = clientOrder;
-                textBlockCountClientOrder.Text = $"Количество: {clientOrder.Count()} из {db.ClientOrders.ToList().Count}";
+                textBlockCountClientOrder.Text = $"Количество: {clientOrder.Count()} из {db.ClientOrders.ToList().Count}";         
             }
         }
     }
