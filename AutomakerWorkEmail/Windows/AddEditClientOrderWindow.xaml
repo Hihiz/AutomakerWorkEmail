@@ -7,16 +7,27 @@
         mc:Ignorable="d"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         Title="Редактирование/добавление заказа клиента" 
-        Height="450" 
-        Width="500"
+        Height="550" 
+        Width="550"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontSize" Value="15"/>
         </Style>
 
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
     </Window.Resources>
 
     <Grid>
@@ -93,7 +104,7 @@
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" 
                     VerticalAlignment="Center"
                     Width="160"
-                    Margin="0, 0, 19, 330" 
+                    Margin="0, 0, 19, 420" 
                     IsEnabled="False"
                     x:Name="panelId">
 
@@ -102,14 +113,14 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1"
-            HorizontalAlignment="Center"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Orientation="Horizontal">
+                    Margin="0, 0, 0, 45">
 
             <StackPanel HorizontalAlignment="Center" 
                         VerticalAlignment="Center" 
                         Width="160" 
-                        Margin="0, 35, 20, 0">
+                        Margin="0, 55, 20, 0">
                 <TextBlock Text="Статус"/>
                 <ComboBox x:Name="comboBoxStatus" 
                           SelectedValue="{Binding Status}" 
@@ -135,6 +146,7 @@
                 <TextBlock x:Name="textBlockCode" Text="Код для получения"/>
                 <TextBox x:Name="textBoxCode" IsEnabled="False" Text="{Binding Code}"/>
 
+                <TextBlock Text="Дата получения"/>
                 <DatePicker  Margin="0, 5, 0, 0"
                              x:Name="datePickerDateDispatch"                           
                              SelectedDate="{Binding DateDispatch}"/>
