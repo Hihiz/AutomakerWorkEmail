@@ -1,10 +1,12 @@
 ﻿using AutomakerWorkEmail.Infrastructure;
 using AutomakerWorkEmail.Models;
+using AutomakerWorkEmail.Windows;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace AutomakerWorkEmail.Windows
 {

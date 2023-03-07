@@ -70,6 +70,8 @@
 
             <StackPanel Grid.Column="2" HorizontalAlignment="Center">
                 <TextBlock x:Name="textBlockCountClientOrder" Text="Колво" FontSize="14"/>
+                <TextBlock x:Name="textBlockCountCloseClientOrder" Text="Колво" FontSize="14"/>
+                
             </StackPanel>
         </Grid>
 

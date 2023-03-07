@@ -135,11 +135,18 @@ namespace AutomakerWorkEmail.Windows
 
                         //db.Entry(currentClientOrder).State = EntityState.Modified;      
 
+                        //db.ClientOrders.Find(currentClientOrder.Id);
+                        //db.ClientOrders.Find(currentClientOrder.Client.Id);
+                        //db.ClientOrders.Find(currentClientOrder.Service.Id);
+
+                        //db.ClientOrders.Attach(currentClientOrder);
+
+
+
                         db.ClientOrders.Update(currentClientOrder);
                         //db.Entry(currentClientOrder).State = EntityState.Detached;
 
 
-                        //db.ClientOrders.Attach(currentClientOrder);
 
                         db.SaveChanges();
                         MessageBox.Show("Заказ обновлен", "Успешно");
@@ -150,9 +157,13 @@ namespace AutomakerWorkEmail.Windows
                     }
                 }
 
-                TrackingClientOrderWindow trackingClientOrderWindow = Application.Current.Windows.OfType<TrackingClientOrderWindow>().FirstOrDefault();
-                (trackingClientOrderWindow.FindName("gridClientOrder") as DataGrid).ItemsSource = db.ClientOrders.Include(c => c.Client).Include(s => s.Service).ToList();
-                (trackingClientOrderWindow.FindName("textBlockCountClientOrder") as TextBlock).Text = $"Количество: {db.ClientOrders.Count()}";
+                new UpdateDataGrid().RefreshData();
+
+                //TrackingClientOrderWindow trackingClientOrderWindow = Application.Current.Windows.OfType<TrackingClientOrderWindow>().FirstOrDefault();
+                //(trackingClientOrderWindow.FindName("gridClientOrder") as DataGrid).ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status != "Выдан").ToList();
+                //(trackingClientOrderWindow.FindName("gridCloseOrder") as DataGrid).ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status == "Выдан").ToList();
+                //(trackingClientOrderWindow.FindName("textBlockCountClientOrder") as TextBlock).Text = $"Количество Активных закзов: {db.ClientOrders.Where(s => s.Status != "Выдан").Count()}";
+                //(trackingClientOrderWindow.FindName("textBlockCountCloseClientOrder") as TextBlock).Text = $"Количество Закрытых закзов: {db.ClientOrders.Where(s => s.Status == "Выдан").Count()}";
             }
         }
 

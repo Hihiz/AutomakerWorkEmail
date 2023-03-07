@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
 
 namespace AutomakerWorkEmail.Windows
 {
@@ -20,9 +18,12 @@ namespace AutomakerWorkEmail.Windows
 
             using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
             {
-                gridClientOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).ToList();
+                //gridClientOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).ToList();
 
-                textBlockCountClientOrder.Text = $"Количество: {db.ClientOrders.Count()}";
+                //textBlockCountClientOrder.Text = $"Количество: {db.ClientOrders.Count()}";
+
+                textBlockCountClientOrder.Text = $"Количество Активных закзов: {db.ClientOrders.Where(s => s.Status != "Выдан").Count()}";
+                textBlockCountCloseClientOrder.Text = $"Количество Закрытых закзов: {db.ClientOrders.Where(s => s.Status == "Выдан").Count()}";
 
                 if (currentWorker.RoleId == 1)
                     menuItemAdmin.Visibility = Visibility.Visible;
@@ -30,6 +31,7 @@ namespace AutomakerWorkEmail.Windows
                     menuItemAdmin.Visibility = Visibility.Collapsed;
 
                 gridCloseOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status == "Выдан").ToList();
+                gridClientOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status != "Выдан").ToList();
             }
 
             textBlockStatusWorker.Text = $"Вы вошли как: {worker.FirstName} {worker.LastName} {worker.Patronymic} | {worker.Role.Name}";
@@ -46,11 +48,9 @@ namespace AutomakerWorkEmail.Windows
 
             new CodeClientWindow(currentClientOrder).ShowDialog();
 
-            using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
-            {
-                gridClientOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).ToList();
-                textBlockCountClientOrder.Text = $"Количество: {db.ClientOrders.Count()}";
-            }
+         
+
+            //UpdateDataGrid();
         }
 
         private void EditClientOrder_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -62,17 +62,19 @@ namespace AutomakerWorkEmail.Windows
                 new AddEditClientOrderWindow(currentClientOrder).ShowDialog();
             }
 
-            using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
-            {
-                gridClientOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).ToList();
-                textBlockCountClientOrder.Text = $"Количество: {db.ClientOrders.Count()}";
-                gridCloseOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status == "Выдан").ToList();
-            }
+       
+
+
+            //UpdateDataGrid();
         }
 
         private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {
             new AddEditClientOrderWindow(null).ShowDialog();
+
+           
+
+            //UpdateDataGrid();
         }
 
         private void MenuItemDataWorker_Click(object sender, RoutedEventArgs e)
@@ -117,8 +119,23 @@ namespace AutomakerWorkEmail.Windows
                     clientOrder = clientOrder.Where(l => l.Client.LastName.Contains(textBoxSearchLastName.Text)).ToList();
 
                 gridClientOrder.ItemsSource = clientOrder;
-                textBlockCountClientOrder.Text = $"Количество: {clientOrder.Count()} из {db.ClientOrders.ToList().Count}";         
+                textBlockCountClientOrder.Text = $"Количество: {clientOrder.Count()} из {db.ClientOrders.ToList().Count}";
             }
         }
+
+        //public void UpdateDataGrid()
+        //{
+        //    using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
+        //    {
+        //        //gridClientOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).ToList();
+        //        //textBlockCountClientOrder.Text = $"Количество: {db.ClientOrders.Count()}";
+
+        //        textBlockCountClientOrder.Text = $"Количество Активных закзов: {db.ClientOrders.Where(s => s.Status != "Выдан").Count()}";
+        //        textBlockCountCloseClientOrder.Text = $"Количество Закрытых закзов: {db.ClientOrders.Where(s => s.Status == "Выдан").Count()}";
+
+        //        gridCloseOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status == "Выдан").ToList();
+        //        gridClientOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status != "Выдан").ToList();
+        //    }
+        //}
     }
 }
