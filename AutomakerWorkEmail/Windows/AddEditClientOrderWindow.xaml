@@ -50,7 +50,7 @@
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center" Height="auto">
 
             <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">

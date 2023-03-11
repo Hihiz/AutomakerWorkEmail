@@ -35,6 +35,7 @@ namespace AutomakerWorkEmail.Windows
             }
 
             textBlockStatusWorker.Text = $"Вы вошли как: {worker.FirstName} {worker.LastName} {worker.Patronymic} | {worker.Role.Name}";
+
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
@@ -48,7 +49,7 @@ namespace AutomakerWorkEmail.Windows
 
             new CodeClientWindow(currentClientOrder).ShowDialog();
 
-         
+
 
             //UpdateDataGrid();
         }
@@ -62,7 +63,7 @@ namespace AutomakerWorkEmail.Windows
                 new AddEditClientOrderWindow(currentClientOrder).ShowDialog();
             }
 
-       
+
 
 
             //UpdateDataGrid();
@@ -72,7 +73,7 @@ namespace AutomakerWorkEmail.Windows
         {
             new AddEditClientOrderWindow(null).ShowDialog();
 
-           
+
 
             //UpdateDataGrid();
         }

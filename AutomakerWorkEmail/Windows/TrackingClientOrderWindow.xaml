@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AutomakerWorkEmail"
         mc:Ignorable="d"
         Title="Отслеживание заказов клиентов"
-        Height="600"
+        Height="700"
         Width="1300"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen">
@@ -68,14 +68,17 @@
 
             </StackPanel>
 
-            <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+            <StackPanel Grid.Column="2"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center" 
+                        Margin="10">
                 <TextBlock x:Name="textBlockCountClientOrder" Text="Колво" FontSize="14"/>
                 <TextBlock x:Name="textBlockCountCloseClientOrder" Text="Колво" FontSize="14"/>
-                
+
             </StackPanel>
         </Grid>
 
-        <TabControl Grid.Row="2">
+        <TabControl Grid.Row="2" Margin="5">
             <TabItem Header="Активные заказа">
                 <StackPanel Orientation="Horizontal">
                     <DataGrid x:Name="gridClientOrder"
@@ -94,12 +97,12 @@
                             <DataGridTextColumn Header="Дата доставки" Binding="{Binding DateDispatch}"/>
                             <DataGridTextColumn Header="Адрес доставки" Binding="{Binding Address}" />
                             <DataGridTextColumn Header="Итоговая цена" Binding="{Binding FinalCost}"/>
-                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="80"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
 
                             <DataGridTemplateColumn Header="Действие">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Выдать" Click="ButtonCloseOrder_Click" Background="DodgerBlue"/>
+                                        <Button HorizontalAlignment="Center" Content="Выдать" Click="ButtonCloseOrder_Click" Background="DodgerBlue"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -138,7 +141,7 @@
                             <DataGridTextColumn Header="Дата доставки" Binding="{Binding DateDispatch}"/>
                             <DataGridTextColumn Header="Адрес доставки" Binding="{Binding Address}" />
                             <DataGridTextColumn Header="Итоговая цена" Binding="{Binding FinalCost}"/>
-                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="80"/>
+                            <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
 
                         </DataGrid.Columns>
 
@@ -146,7 +149,7 @@
                             <Style TargetType="DataGridRow">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Value="Выдан">
-                                        <Setter Property="Background" Value="Yellow"/>
+                                        <Setter Property="Background" Value="Gainsboro"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>

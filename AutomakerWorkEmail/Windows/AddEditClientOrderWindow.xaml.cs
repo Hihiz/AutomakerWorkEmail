@@ -132,21 +132,9 @@ namespace AutomakerWorkEmail.Windows
                     try
                     {
                         //db.Entry(currentClientOrder).State = EntityState.Detached;
-
-                        //db.Entry(currentClientOrder).State = EntityState.Modified;      
-
-                        //db.ClientOrders.Find(currentClientOrder.Id);
-                        //db.ClientOrders.Find(currentClientOrder.Client.Id);
-                        //db.ClientOrders.Find(currentClientOrder.Service.Id);
-
-                        //db.ClientOrders.Attach(currentClientOrder);
-
-
+                        //db.Set<ClientOrder>().Update(currentClientOrder);
 
                         db.ClientOrders.Update(currentClientOrder);
-                        //db.Entry(currentClientOrder).State = EntityState.Detached;
-
-
 
                         db.SaveChanges();
                         MessageBox.Show("Заказ обновлен", "Успешно");
