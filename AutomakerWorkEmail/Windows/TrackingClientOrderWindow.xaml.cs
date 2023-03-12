@@ -17,11 +17,7 @@ namespace AutomakerWorkEmail.Windows
             currentWorker = worker;
 
             using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
-            {
-                //gridClientOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).ToList();
-
-                //textBlockCountClientOrder.Text = $"Количество: {db.ClientOrders.Count()}";
-
+            {                
                 textBlockCountClientOrder.Text = $"Количество Активных закзов: {db.ClientOrders.Where(s => s.Status != "Выдан").Count()}";
                 textBlockCountCloseClientOrder.Text = $"Количество Закрытых закзов: {db.ClientOrders.Where(s => s.Status == "Выдан").Count()}";
 
@@ -48,10 +44,6 @@ namespace AutomakerWorkEmail.Windows
             ClientOrder currentClientOrder = gridClientOrder.SelectedItem as ClientOrder;
 
             new CodeClientWindow(currentClientOrder).ShowDialog();
-
-
-
-            //UpdateDataGrid();
         }
 
         private void EditClientOrder_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -62,20 +54,11 @@ namespace AutomakerWorkEmail.Windows
 
                 new AddEditClientOrderWindow(currentClientOrder).ShowDialog();
             }
-
-
-
-
-            //UpdateDataGrid();
         }
 
         private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {
             new AddEditClientOrderWindow(null).ShowDialog();
-
-
-
-            //UpdateDataGrid();
         }
 
         private void MenuItemDataWorker_Click(object sender, RoutedEventArgs e)
@@ -123,20 +106,5 @@ namespace AutomakerWorkEmail.Windows
                 textBlockCountClientOrder.Text = $"Количество: {clientOrder.Count()} из {db.ClientOrders.ToList().Count}";
             }
         }
-
-        //public void UpdateDataGrid()
-        //{
-        //    using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
-        //    {
-        //        //gridClientOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).ToList();
-        //        //textBlockCountClientOrder.Text = $"Количество: {db.ClientOrders.Count()}";
-
-        //        textBlockCountClientOrder.Text = $"Количество Активных закзов: {db.ClientOrders.Where(s => s.Status != "Выдан").Count()}";
-        //        textBlockCountCloseClientOrder.Text = $"Количество Закрытых закзов: {db.ClientOrders.Where(s => s.Status == "Выдан").Count()}";
-
-        //        gridCloseOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status == "Выдан").ToList();
-        //        gridClientOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status != "Выдан").ToList();
-        //    }
-        //}
     }
 }

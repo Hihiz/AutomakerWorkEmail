@@ -3,6 +3,7 @@ using AutomakerWorkEmail.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -131,12 +132,9 @@ namespace AutomakerWorkEmail.Windows
 
                     try
                     {
-                        //db.Entry(currentClientOrder).State = EntityState.Detached;
-                        //db.Set<ClientOrder>().Update(currentClientOrder);
-
                         db.ClientOrders.Update(currentClientOrder);
-
                         db.SaveChanges();
+
                         MessageBox.Show("Заказ обновлен", "Успешно");
                     }
                     catch (Exception ex)
@@ -146,12 +144,6 @@ namespace AutomakerWorkEmail.Windows
                 }
 
                 new UpdateDataGrid().RefreshData();
-
-                //TrackingClientOrderWindow trackingClientOrderWindow = Application.Current.Windows.OfType<TrackingClientOrderWindow>().FirstOrDefault();
-                //(trackingClientOrderWindow.FindName("gridClientOrder") as DataGrid).ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status != "Выдан").ToList();
-                //(trackingClientOrderWindow.FindName("gridCloseOrder") as DataGrid).ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status == "Выдан").ToList();
-                //(trackingClientOrderWindow.FindName("textBlockCountClientOrder") as TextBlock).Text = $"Количество Активных закзов: {db.ClientOrders.Where(s => s.Status != "Выдан").Count()}";
-                //(trackingClientOrderWindow.FindName("textBlockCountCloseClientOrder") as TextBlock).Text = $"Количество Закрытых закзов: {db.ClientOrders.Where(s => s.Status == "Выдан").Count()}";
             }
         }
 
