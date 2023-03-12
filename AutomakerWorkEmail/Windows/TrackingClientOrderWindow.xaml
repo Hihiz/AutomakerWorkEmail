@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Отслеживание заказов клиентов"
         Height="700"
-        Width="1300"
+        Width="1400"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen">
 
@@ -102,7 +102,7 @@
                             <DataGridTemplateColumn Header="Действие">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button HorizontalAlignment="Center" Content="Выдать" Click="ButtonCloseOrder_Click" Background="DodgerBlue"/>
+                                        <Button Content="Выдать" Click="ButtonCloseOrder_Click" Background="DodgerBlue"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

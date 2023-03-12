@@ -51,6 +51,8 @@ namespace AutomakerWorkEmail.Windows
             List<string> comboBoxStatusList = new List<string>() { "Создан", "Оформлен", "В ожидании", "Отправлено", "Принят", "Готов", "Выдан" };
 
             comboBoxStatus.ItemsSource = comboBoxStatusList.ToList();
+
+            new UpdateDataGrid().RefreshData();
         }
 
         private void MenuItemClientOrder_Click(object sender, RoutedEventArgs e)
