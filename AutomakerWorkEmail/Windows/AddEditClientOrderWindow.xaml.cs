@@ -134,6 +134,8 @@ namespace AutomakerWorkEmail.Windows
 
                     try
                     {
+                        //db.Entry<ClientOrder>(currentClientOrder).State = EntityState.Detached;
+
                         db.ClientOrders.Update(currentClientOrder);
                         db.SaveChanges();
 

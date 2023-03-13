@@ -72,13 +72,13 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center" 
                         Margin="10">
-                <TextBlock x:Name="textBlockCountClientOrder" Text="Колво" FontSize="14"/>
-                <TextBlock x:Name="textBlockCountCloseClientOrder" Text="Колво" FontSize="14"/>
+                <TextBlock x:Name="textBlockCountClientOrder" Text="Колво" FontSize="18"/>
+                <TextBlock x:Name="textBlockCountCloseClientOrder" Text="Колво" FontSize="18"/>
 
             </StackPanel>
         </Grid>
 
-        <TabControl Grid.Row="2" Margin="5">
+        <TabControl Grid.Row="2" Margin="5" FontSize="15">
             <TabItem Header="Активные заказа">
                 <StackPanel Orientation="Horizontal">
                     <DataGrid x:Name="gridClientOrder"

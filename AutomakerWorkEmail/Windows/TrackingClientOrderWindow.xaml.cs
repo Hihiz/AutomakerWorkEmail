@@ -18,8 +18,8 @@ namespace AutomakerWorkEmail.Windows
 
             using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
             {                
-                textBlockCountClientOrder.Text = $"Количество Активных закзов: {db.ClientOrders.Where(s => s.Status != "Выдан").Count()}";
-                textBlockCountCloseClientOrder.Text = $"Количество Закрытых закзов: {db.ClientOrders.Where(s => s.Status == "Выдан").Count()}";
+                textBlockCountClientOrder.Text = $"Количество Активных заказов: {db.ClientOrders.Where(s => s.Status != "Выдан").Count()}";
+                textBlockCountCloseClientOrder.Text = $"Количество Закрытых заказов: {db.ClientOrders.Where(s => s.Status == "Выдан").Count()}";
 
                 if (currentWorker.RoleId == 1)
                     menuItemAdmin.Visibility = Visibility.Visible;
