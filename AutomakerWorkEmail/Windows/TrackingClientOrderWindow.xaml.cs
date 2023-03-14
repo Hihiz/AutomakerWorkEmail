@@ -118,6 +118,14 @@ namespace AutomakerWorkEmail.Windows
 
         private void ButtonClear_Click(object sender, RoutedEventArgs e)
         {
+            textBoxSearchTrackNumber.Text = string.Empty;
+            textBoxSearchLastName.Text = string.Empty;
+            textBoxSearchCode.Text = string.Empty;
+
+            using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
+            {
+                textBlockCountClientOrder.Text = $"Количество Активных заказов: {db.ClientOrders.Where(s => s.Status != "Выдан").Count()}";
+            }
 
         }
     }
