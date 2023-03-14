@@ -13,9 +13,12 @@
 
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto">
-            <TextBlock Text="Для выдачи заказа, введите код выдачи клиента"/>
-            <TextBox x:Name="textBoxCodeClient"/>
-            <Button Content="Выдать" Margin="40, 10, 40, 0" Click="ButtonGetOrderClient_Click"/>
+            <TextBlock Text="Для выдачи заказа, введите код выдачи клиента" FontSize="15"/>
+            <TextBox x:Name="textBoxCodeClient" FontSize="14"/>
+            <Button Content="Выдать"
+                    Margin="40, 10, 40, 0" 
+                    Click="ButtonGetOrderClient_Click"
+                    Background="DodgerBlue"/>
         </StackPanel>
     </Grid>
 </Window>

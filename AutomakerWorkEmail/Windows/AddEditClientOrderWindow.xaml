@@ -88,7 +88,8 @@
                         VerticalAlignment="Center"
                         Width="120"
                         Background="DodgerBlue"
-                        Click="ButtonSaveClient_Click"/>
+                        Click="ButtonSaveClient_Click"
+                    FontSize="15"/>
         </StackPanel>
 
         <GridSplitter Grid.RowSpan="2" Width="5"/>
@@ -170,7 +171,8 @@
                         Margin="0, 0, 0, 5"
                         Width="120"
                         Background="DodgerBlue"
-                        Click="ButtonSaveClientOrder_Click"/>
+                        Click="ButtonSaveClientOrder_Click"
+                    FontSize="15"/>
         </StackPanel>
     </Grid>
 </Window>

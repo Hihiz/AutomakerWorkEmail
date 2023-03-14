@@ -99,7 +99,7 @@
         <StackPanel Grid.Row="3" Orientation="Horizontal">
             <StatusBar Background="Transparent">
                 <StatusBarItem>
-                    <TextBlock x:Name="textBlockStatusWorker" Text="Тест Администратор" FontSize="12" FontWeight="Bold"/>
+                    <TextBlock x:Name="textBlockStatusWorker" Text="Тест Администратор" FontSize="13" FontWeight="Bold"/>
                 </StatusBarItem>
                 <Button Content="Выход" Click="ButtonExitRole_Click"/>
             </StatusBar>
