@@ -54,12 +54,6 @@ namespace AutomakerWorkEmail.Windows
             new UpdateDataGrid().RefreshData();
         }
 
-        private void MenuItemClientOrder_Click(object sender, RoutedEventArgs e)
-        {
-            new TrackingClientOrderWindow(null).Show();
-            Close();
-        }
-
         private void ButtonSaveClientOrder_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
@@ -133,11 +127,25 @@ namespace AutomakerWorkEmail.Windows
 
                     try
                     {
-                        //db.Entry<ClientOrder>(currentClientOrder).State = EntityState.Detached;
+
+
+
+                        //db.Entry(currentClientOrder).State = EntityState.Detached;
+
+
+
+                        // Редактирование внешний ключей 
+                        currentClientOrder.ClientId = ((Client)comboBoxClient.SelectedItem).Id;
+                        currentClientOrder.Client = ((Client)comboBoxClient.SelectedItem);
+
+                        currentClientOrder.ServiceId = ((Service)comboBoxService.SelectedItem).Id;
+                        currentClientOrder.Service = ((Service)comboBoxService.SelectedItem);
+                        //
 
 
 
                         db.ClientOrders.Update(currentClientOrder);
+                        //db.Set<ClientOrder>().Update(currentClientOrder);
                         db.SaveChanges();
 
                         MessageBox.Show("Заказ обновлен", "Успешно");
