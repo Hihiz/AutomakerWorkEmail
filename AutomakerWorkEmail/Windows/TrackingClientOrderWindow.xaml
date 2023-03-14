@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Отслеживание заказов клиентов"
         Height="700"
-        Width="1400"
+        Width="1600"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen">
 
@@ -15,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -35,8 +35,10 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="550"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Button Content="Создать заказ"
@@ -47,12 +49,24 @@
                     Background="DodgerBlue"
                     Click="ButtonAddOrder_Click"/>
 
+
             <!--Поиск заказа по трек номеру клиента-->
             <StackPanel Width="130"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center">
 
-                <TextBlock Text="Трек Номер" FontSize="14"/>
+                <TextBlock Text="Код клиента" FontSize="14"/>
+                <TextBox x:Name="textBoxSearchCode" TextChanged="SearchCode_TextChanged"/>
+            </StackPanel>
+
+            <!--Поиск заказа по трек номеру клиента-->
+            <StackPanel Grid.Column="1" 
+                Width="130"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                         Margin="10, 0, 0, 0">
+
+                <TextBlock Text="Трек номер" FontSize="14"/>
                 <TextBox x:Name="textBoxSearchTrackNumber" TextChanged="SearchTrackNumber_TextChanged"/>
             </StackPanel>
 
@@ -68,7 +82,18 @@
 
             </StackPanel>
 
-            <StackPanel Grid.Column="2"
+            <StackPanel Grid.Column="3"
+                        Margin="10"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center">
+                <Button Content="Сброс" 
+                        Width="100" 
+                        FontSize="15" 
+                        Background="DodgerBlue"
+                        Click="ButtonClear_Click"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center" 
                         Margin="10">
@@ -80,7 +105,7 @@
 
         <TabControl Grid.Row="2" Margin="5" FontSize="15">
             <TabItem Header="Активные заказа">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" >
                     <DataGrid x:Name="gridClientOrder"
                       IsReadOnly="True"
                       AutoGenerateColumns="False" 
@@ -99,7 +124,7 @@
                             <DataGridTextColumn Header="Итоговая цена" Binding="{Binding FinalCost}"/>
                             <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
 
-                            <DataGridTemplateColumn Header="Действие">
+                            <DataGridTemplateColumn Header="Действие" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button Content="Выдать" Click="ButtonCloseOrder_Click" Background="DodgerBlue"/>
@@ -122,7 +147,7 @@
             </TabItem>
 
             <TabItem Header="Закрытие заказы" x:Name="tabItemCloseOrder">
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
                     <DataGrid x:Name="gridCloseOrder"
                       IsReadOnly="True"
                       AutoGenerateColumns="False" 

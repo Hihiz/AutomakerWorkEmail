@@ -49,7 +49,6 @@ namespace AutomakerWorkEmail.Windows
             }
 
             List<string> comboBoxStatusList = new List<string>() { "Создан", "Оформлен", "В ожидании", "Отправлено", "Принят", "Готов", "Выдан" };
-
             comboBoxStatus.ItemsSource = comboBoxStatusList.ToList();
 
             new UpdateDataGrid().RefreshData();
@@ -135,6 +134,8 @@ namespace AutomakerWorkEmail.Windows
                     try
                     {
                         //db.Entry<ClientOrder>(currentClientOrder).State = EntityState.Detached;
+
+
 
                         db.ClientOrders.Update(currentClientOrder);
                         db.SaveChanges();

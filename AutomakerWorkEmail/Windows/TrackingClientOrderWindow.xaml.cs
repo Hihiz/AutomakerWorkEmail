@@ -17,7 +17,7 @@ namespace AutomakerWorkEmail.Windows
             currentWorker = worker;
 
             using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
-            {                
+            {
                 textBlockCountClientOrder.Text = $"Количество Активных заказов: {db.ClientOrders.Where(s => s.Status != "Выдан").Count()}";
                 textBlockCountCloseClientOrder.Text = $"Количество Закрытых заказов: {db.ClientOrders.Where(s => s.Status == "Выдан").Count()}";
 
@@ -102,9 +102,23 @@ namespace AutomakerWorkEmail.Windows
                 if (textBoxSearchLastName.Text.Length > 0)
                     clientOrder = clientOrder.Where(l => l.Client.LastName.Contains(textBoxSearchLastName.Text)).ToList();
 
+                if (textBoxSearchCode.Text.Length > 0)
+                    clientOrder = clientOrder.Where(c => c.Code.Contains(textBoxSearchCode.Text)).ToList();
+                //clientOrder = clientOrder.Where(c => c.Code == textBoxSearchCode.Text).ToList();
+
                 gridClientOrder.ItemsSource = clientOrder;
                 textBlockCountClientOrder.Text = $"Количество: {clientOrder.Count()} из {db.ClientOrders.ToList().Count}";
             }
+        }
+
+        private void SearchCode_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            SearchClientOrder();
+        }
+
+        private void ButtonClear_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
