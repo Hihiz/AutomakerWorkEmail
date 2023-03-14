@@ -32,7 +32,7 @@ namespace AutomakerWorkEmail.Windows
 
                 Worker worker = db.Workers.Where(w => w.Login == textBoxLogin.Text && w.Password == passwordBox.Password).Include(r => r.Role).FirstOrDefault();
 
-                if (worker != null)
+                if (worker != null && verify )
                 {
                     new TrackingClientOrderWindow(worker).Show();
                     Close();

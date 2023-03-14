@@ -52,7 +52,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center">
 
-                <TextBlock Text="Трек Номер" FontSize="13"/>
+                <TextBlock Text="Трек Номер" FontSize="14"/>
                 <TextBox x:Name="textBoxSearchTrackNumber" TextChanged="SearchTrackNumber_TextChanged"/>
             </StackPanel>
 
@@ -63,7 +63,7 @@
                         VerticalAlignment="Center"
                         Margin="10, 0, 0, 0">
 
-                <TextBlock Text="Фамилия" FontSize="13"/>
+                <TextBlock Text="Фамилия" FontSize="14"/>
                 <TextBox x:Name="textBoxSearchLastName" TextChanged="SearchLastName_TextChanged"/>
 
             </StackPanel>
@@ -80,7 +80,8 @@
 
         <TabControl Grid.Row="2" Margin="5" FontSize="15">
             <TabItem Header="Активные заказа">
-                <StackPanel Orientation="Horizontal">
+
+                <StackPanel Orientation="Vertical">
                     <DataGrid x:Name="gridClientOrder"
                       IsReadOnly="True"
                       AutoGenerateColumns="False" 
@@ -119,6 +120,8 @@
                         </DataGrid.ItemContainerStyle>
                     </DataGrid>
                 </StackPanel>
+
+
             </TabItem>
 
             <TabItem Header="Закрытие заказы" x:Name="tabItemCloseOrder">
