@@ -1,4 +1,5 @@
-﻿using AutomakerWorkEmail.Models;
+﻿using AutomakerWorkEmail.Infrastructure;
+using AutomakerWorkEmail.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,7 +94,7 @@ namespace AutomakerWorkEmail.Windows
         {
             using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
             {
-                List<ClientOrder> clientOrder = db.ClientOrders.Include(c => c.Client).Include(s => s.Service).ToList();
+                List<ClientOrder> clientOrder = db.ClientOrders.Include(c => c.Client).Include(s => s.Service).Where(s => s.Status != "Выдан").ToList();
                 gridClientOrder.ItemsSource = clientOrder;
 
                 if (textBoxSearchTrackNumber.Text.Length > 0)
@@ -107,7 +108,8 @@ namespace AutomakerWorkEmail.Windows
                 //clientOrder = clientOrder.Where(c => c.Code == textBoxSearchCode.Text).ToList();
 
                 gridClientOrder.ItemsSource = clientOrder;
-                textBlockCountClientOrder.Text = $"Количество: {clientOrder.Count()} из {db.ClientOrders.ToList().Count}";
+                //textBlockCountClientOrder.Text = $"Количество: {clientOrder.Count()} из {db.ClientOrders.ToList().Count}";
+                textBlockCountClientOrder.Text = $"Количество: {clientOrder.Count()} из {db.ClientOrders.ToList().Where(s => s.Status != "Выдан").Count()}";
             }
         }
 
@@ -126,7 +128,6 @@ namespace AutomakerWorkEmail.Windows
             {
                 textBlockCountClientOrder.Text = $"Количество Активных заказов: {db.ClientOrders.Where(s => s.Status != "Выдан").Count()}";
             }
-
         }
     }
 }
