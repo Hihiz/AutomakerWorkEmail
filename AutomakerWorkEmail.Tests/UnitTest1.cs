@@ -14,14 +14,14 @@ namespace AutomakerWorkEmail.Tests
         {
             string password = "4";
 
-            Worker actual;
+            Worker worker;
 
             using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
             {
-                actual = db.Workers.Where(p => p.Password == password).FirstOrDefault();
+                worker = db.Workers.Where(p => p.Password == password).FirstOrDefault();
             }
 
-            Assert.AreEqual(password, actual.Password);
+            Assert.AreEqual(password, worker.Password);
         }
 
         [Test]
@@ -29,14 +29,14 @@ namespace AutomakerWorkEmail.Tests
         {
             string login = "5";
 
-            Worker actual;
+            Worker worker;
 
             using (AutomakerWorkEmailContext db = new AutomakerWorkEmailContext())
             {
-                actual = db.Workers.Where(p => p.Login == login).FirstOrDefault();
+                worker = db.Workers.Where(p => p.Login == login).FirstOrDefault();
             }
 
-            Assert.AreEqual(login, actual.Login);
+            Assert.AreEqual(login, worker.Login);
         }
     }
 }

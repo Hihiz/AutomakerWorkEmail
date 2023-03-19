@@ -22,7 +22,7 @@ namespace AutomakerWorkEmail.Windows
 
             currentWorker = worker;
 
-            textBlockStatusWorker.Text = $"Вы вошли как: {worker.FirstName} {worker.LastName} {worker.Patronymic} | {worker.Role.Name}";
+            textBlockStatusWorker.Text = $"Вы вошли как: {worker.LastName} {worker.FirstName} {worker.Patronymic} | {worker.Role.Name}";
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)

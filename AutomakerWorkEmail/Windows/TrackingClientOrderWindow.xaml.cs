@@ -30,7 +30,7 @@ namespace AutomakerWorkEmail.Windows
                 gridClientOrder.ItemsSource = db.ClientOrders.Include(s => s.Service).Include(c => c.Client).Where(s => s.Status != "Выдан").ToList();
             }
 
-            textBlockStatusWorker.Text = $"Вы вошли как: {worker.FirstName} {worker.LastName} {worker.Patronymic} | {worker.Role.Name}";
+            textBlockStatusWorker.Text = $"Вы вошли как: {worker.LastName} {worker.FirstName} {worker.Patronymic} | {worker.Role.Name}";
 
         }
 
